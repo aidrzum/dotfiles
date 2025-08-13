@@ -12,7 +12,7 @@
 # ----------------------------------------------------- 
 # Select wallpaper
 # ----------------------------------------------------- 
-selected=$(ls -1 ~/Pictures/wallpapers/stephen_wallpapers/ | rofi -dmenu -p "Wallpapers")
+selected=$(ls -1 ~/Pictures/wallpaper/cyber25/ | rofi -dmenu -p "Wallpapers")
 
 if [ "$selected" ]; then
 
@@ -20,7 +20,7 @@ if [ "$selected" ]; then
     # ----------------------------------------------------- 
     # Update wallpaper with pywal
     # ----------------------------------------------------- 
-    wal -q -i ~/Pictures/wallpapers/stephen_wallpapers/$selected
+    wal -q -i ~/Pictures/wallpaper/cyber25/$selected
 
     # ----------------------------------------------------- 
     # Get new theme
@@ -38,7 +38,7 @@ if [ "$selected" ]; then
     # Set the new wallpaper
     # ----------------------------------------------------- 
     swww img $wallpaper --transition-step 20 --transition-fps=20
-    ~/.config/waybar/reload.sh
+    ~/.config/waybar/waybar-reload.sh
 
     # ----------------------------------------------------- 
     # Send notification
