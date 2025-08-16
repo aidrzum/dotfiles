@@ -1,0 +1,198 @@
+#+title: emacs_config
+#+AUTHOR: rdia
+#+PROPERTY: header-args :tangle config.el
+
+* TABLE OF CONTENTS :toc:
+- [[#beacon][BEACON]]
+- [[#font-settings][Font Settings]]
+- [[#info-settings][Info Settings]]
+- [[#org-bullet-list][Org Bullet List]]
+- [[#neotree-toggle-setup][Neotree Toggle Setup]]
+- [[#dired-config-setting][Dired Config Setting]]
+  - [[#basic-dired-commands][Basic dired commands]]
+  - [[#dired-commands-using-regex][Dired commands using regex]]
+  - [[#file-permissions-and-ownership][File permissions and ownership]]
+  - [[#making-deleted-files-go-to-trash-can][Making deleted files go to trash can]]
+  - [[#enabling-icons-on-dired][Enabling icons on dired]]
+- [[#peep-dired-setting][Peep Dired Setting]]
+  - [[#peep-dired-activation][Peep Dired activation]]
+  - [[#toggle-peep-dired-with-spc-d-p][Toggle peep-dired with spc-d-p]]
+- [[#treemacs-setting][Treemacs Setting]]
+  - [[#treemac-toggle-setting][Treemac toggle setting]]
+- [[#theme-settings][Theme Settings]]
+- [[#line-number-setting][Line number Setting]]
+- [[#org-directory-setting][Org directory Setting]]
+
+* BEACON
+Never lose your cursor.  When you scroll, your cursor will shine!  This is a global minor-mode. Turn it on everywhere with:
+
+#+begin_src emacs-lisp
+(beacon-mode 1)
+#+end_src
+
+* Font Settings
+My Custom Font settings
+
+#+begin_src emacs-lisp
+(setq doom-font (font-spec :family "Agave Nerd Font" :size 12)
+        doom-variable-pitch-font (font-spec :family "Agave Nerd Font" :size 12))
+(after! doom-themes
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
+(custom-set-faces!
+  '(font-lock-comment-face :slant italic)
+  '(font-lock-keyword-face :slant italic))
+#+end_src
+* Info Settings
+
+#+begin_src emacs-lisp
+(setq user-full-name "rdia"
+      user-mail-address "aidrl1v3@gmail.com")
+#+end_src
+
+* Org Bullet List
+
+#+begin_src emacs-lisp
+(setq
+    org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿" "◆")
+)
+#+end_src
+
+* Neotree Toggle Setup
+My Neotree Toggle Setup
+
+#+begin_src emacs-lisp
+(map! :leader
+      :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
+      :desc "Open directory in neotree"  "d n" #'neotree-dir)
+#+end_src
+
+* Dired Config Setting
+** Basic dired commands
+
+| COMMAND                | DESCRIPTION                                 | KEYBINDING |
+|------------------------+---------------------------------------------+------------|
+| dired-view-file        | /View file in dired/                          | SPC d v    |
+| dired-up-directory     | /Go up in directory tree/                     | h          |
+| dired-find-file        | /Go down in directory tree (or open if file)/ | l          | | dired-next-line        | Move down to next line                      | j          | | dired-previous-line    | Move up to previous line                    | k          |
+| dired-mark             | Mark file at point                          | m          |
+| dired-unmark           | Unmark file at point                        | u          |
+| dired-do-copy          | Copy current file or marked files           | C          |
+| dired-do-rename        | Rename current file or marked files         | R          |
+| dired-hide-details     | Toggle detailed listings on/off             | (          |
+| dired-git-info-mode    | Toggle git information on/off               | )          |
+| dired-create-directory | Create new empty directory                  | +          |
+| dired-diff             | Compare file at point with another          | =          |
+| dired-subtree-toggle   | Toggle viewing subtree at point             | TAB        |
+
+** Dired commands using regex
+
+| COMMAND                 | DESCRIPTION                | KEYBINDING |
+|-------------------------+----------------------------+------------|
+| dired-mark-files-regexp | Mark files using regex     | % m        |
+| dired-do-copy-regexp    | Copy files using regex     | % C        |
+| dired-do-rename-regexp  | Rename files using regex   | % R        |
+| dired-mark-files-regexp | Mark all files using regex | * %        |
+
+** File permissions and ownership
+
+| COMMAND         | DESCRIPTION                      | KEYBINDING |
+|-----------------+----------------------------------+------------|
+| dired-do-chgrp  | Change the group of marked files | g G        |
+| dired-do-chmod  | Change the mode of marked files  | M          |
+| dired-do-chown  | Change the owner of marked files | O          |
+| dired-do-rename | Rename file or all marked files  | R          |
+
+#+begin_src emacs-lisp
+(map! :leader
+      (:prefix ("d" . "dired")
+       :desc "Open dired" "d" #'dired
+       :desc "Dired jump to current" "j" #'dired-jump)
+      (:after dired
+       (:map dired-mode-map
+        :desc "Dired view file" "d v" #'dired-view-file)))
+
+(evil-define-key 'normal dired-mode-map
+  (kbd "M-RET") 'dired-display-file
+  (kbd "h") 'dired-up-directory
+  (kbd "l") 'dired-find-file ; use dired-find-file instead of dired-open.
+  (kbd "m") 'dired-mark
+  (kbd "t") 'dired-toggle-marks
+  (kbd "u") 'dired-unmark
+  (kbd "C") 'dired-do-copy
+  (kbd "D") 'dired-do-delete
+  (kbd "J") 'dired-goto-file
+  (kbd "M") 'dired-do-chmod
+  (kbd "O") 'dired-do-chown
+  (kbd "P") 'dired-do-print
+  (kbd "R") 'dired-do-rename
+  (kbd "T") 'dired-do-touch
+  (kbd "Y") 'dired-copy-filenamecopy-filename-as-kill ; copies filename to kill ring.
+  (kbd "+") 'dired-create-directory
+  (kbd "-") 'dired-up-directory
+  (kbd "% l") 'dired-downcase
+  (kbd "% u") 'dired-upcase
+  (kbd "; d") 'epa-dired-do-decrypt
+  (kbd "; e") 'epa-dired-do-encrypt)
+ #+end_src
+
+** Making deleted files go to trash can
+
+#+begin_src emacs-lisp
+(setq delete-by-moving-to-trash t
+      trash-directory "~/.local/share/Trash/files/")
+#+end_src
+
+** Enabling icons on dired
+
+#+begin_src emacs-lisp
+(add-hook 'dired-mode-hook 'dired-icon-mode)
+;;(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+#+end_src
+
+* Peep Dired Setting
+** Peep Dired activation
+
+#+begin_src emacs-lisp
+(evil-define-key 'normal peep-dired-mode-map
+  (kbd "j") 'peep-dired-next-file
+  (kbd "k") 'peep-dired-prev-file)
+(add-hook 'peep-dired-hook 'evil-normalize-keymaps)
+#+end_src
+
+** Toggle peep-dired with spc-d-p
+
+ #+begin_src emacs-lisp
+(map! :leader
+:desc "Peep-dired image previews" "d p" #'peep-dired)
+ #+end_src
+
+* Treemacs Setting
+** Treemac toggle setting
+
+ #+begin_src emacs-lisp
+(map! :leader
+:desc "Treemacs toggle" "e" #'treemacs)
+ #+end_src
+
+* Theme Settings
+
+#+begin_src emacs-lisp
+(setq doom-theme 'doom-dracula)
+#+end_src
+
+#+RESULTS:
+: doom-nord
+
+* Line number Setting
+
+#+begin_src emacs-lisp
+(setq display-line-numbers-type t)
+#+end_src
+
+* Org directory Setting
+
+#+begin_src emacs-lisp
+(setq org-directory "~/org/")
+(setq org-hide-emphasis-markers t)
+#+end_src
