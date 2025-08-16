@@ -20,6 +20,7 @@
 - [[#treemacs-setting][Treemacs Setting]]
   - [[#treemac-toggle-setting][Treemac toggle setting]]
 - [[#theme-settings][Theme Settings]]
+- [[#layout-management-for-no-shrink-effect][Layout management for no shrink effect]]
 - [[#line-number-setting][Line number Setting]]
 - [[#org-directory-setting][Org directory Setting]]
 
@@ -46,8 +47,8 @@ My Custom Font settings
 * Info Settings
 
 #+begin_src emacs-lisp
-(setq user-full-name "rdia"
-      user-mail-address "aidrl1v3@gmail.com")
+(setq user-full-name "aidr"
+      user-mail-address "aidr****@gmail.com")
 #+end_src
 
 * Org Bullet List
@@ -183,6 +184,15 @@ My Neotree Toggle Setup
 
 #+RESULTS:
 : doom-nord
+
+* Layout management for no shrink effect
+
+#+begin_src emacs-lisp
+
+(add-to-list 'default-frame-alist '(width . 30px ))  ; Width set to 80 characters
+(add-to-list 'default-frame-alist '(height . 70px )) ; Height set to 24 lines
+
+#+end_src
 
 * Line number Setting
 
