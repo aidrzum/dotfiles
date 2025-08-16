@@ -21,7 +21,7 @@
         "clock"
     ],
     "modules-right": [
-        "power-profiles-daemon",
+        //"power-profiles-daemon",
         "idle_inhibitor",
         "pulseaudio",
         "cpu",
@@ -195,7 +195,7 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "kitty -e pulsemixer"
+        "on-click": "terminator -e pulsemixer"
     },
     "custom/media": {
         "format": "{icon} {text}",
@@ -242,7 +242,8 @@
         "format" : "⏻ ",
 		"tooltip": false,
 		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/scripts/power_menu.xml", // Menu file in resources folder
+		"menu-file": "~/.config/waybar/scripts/Wlogout.sh", // Menu file in resources folder
+        "on-click": "~/.config/waybar/scripts/Wlogout.sh",
 		"menu-actions": {
 			"shutdown": "shutdown",
 			"reboot": "reboot",

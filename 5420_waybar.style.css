@@ -1,3 +1,5 @@
+@import 'colors-waybar.css';
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, FantasqueSansM Nerd Font, Roboto, Helvetica, Arial, sans-serif;
@@ -8,10 +10,10 @@
 window#waybar {
     background-color: rgba(43, 48, 59, 0.5);
    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-    color: #ffffff;
+    color: @color14;
     transition-property: background-color;
     transition-duration: .5s;
-    border-radius: 20;
+    border-radius: 20px;
 }
 
 window#waybar.hidden {
@@ -47,7 +49,7 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    box-shadow: inset 0 -3px @color15;
 }
 
 /* you can set a style on hover for any module like this */
@@ -59,7 +61,7 @@ button:hover {
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
-    color: #ffffff;
+    color: @color14;
 }
 
 #workspaces button:hover {
@@ -92,6 +94,7 @@ button:hover {
 #wireplumber,
 #custom-media,
 #custom-appmenu,
+#custom-power,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -120,6 +123,7 @@ button:hover {
 #clock {
     /*background-color: #64727D; */
     background-color: transparent;
+    color: @color15;
     /*border-radius: 10px 0px 0px 10px; */
 }
 
@@ -180,12 +184,13 @@ label:focus {
 #cpu {
     /*background-color : #2ecc71; */
     background-color: transparent;
-    color: #FFFFFF;
+    color: @color14;
 }
 
 #memory {
     /*background-color: #9b59b6; */
     background-color: transparent;
+    color: @color15;
 }
 
 #disk {
@@ -209,11 +214,11 @@ label:focus {
 #pulseaudio {
     /*background-color: #f1c40f; */
     background-color: transparent;
-    color: #FFFFFF;
+    color: @color15;
 }
 
 #pulseaudio.muted {
-    /*background-color: #90b1b1; */
+    /*background-cffolor: #90b1b1; */
     background-color: transparent;
     color: #2a5c45;
 }
@@ -243,13 +248,21 @@ label:focus {
 
 #custom-appmenu {
     background-color: transparent;
-    padding: 3;
+    padding: 3px;
+    color: @color15;
 
 }
 
+#custom-power {
+    background-color: transparent;
+    padding: 3px;
+    color: @color15;
+
+}
 #temperature {
     /*background-color: #f0932b; */
     background-color: transparent;
+    color: @color14;
 }
 
 #temperature.critical {
@@ -273,6 +286,7 @@ label:focus {
 #idle_inhibitor {
     /*background-color: #2d3436; */
     background-color: transparent;
+    color: @color14
 }
 
 #idle_inhibitor.activated {
