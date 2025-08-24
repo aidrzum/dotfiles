@@ -1,51 +1,5 @@
-#+title: emacs_config
-#+AUTHOR: rdia
-#+PROPERTY: header-args :tangle config.el
-
-* TABLE OF CONTENTS :toc:
-- [[#beacon][BEACON]]
-- [[#font-settings][Font Settings]]
-- [[#info-settings][Info Settings]]
-- [[#org-bullet-list][Org Bullet List]]
-- [[#neotree-toggle-setup][Neotree Toggle Setup]]
-- [[#dired-config-setting][Dired Config Setting]]
-  - [[#basic-dired-commands][Basic dired commands]]
-  - [[#dired-commands-using-regex][Dired commands using regex]]
-  - [[#file-permissions-and-ownership][File permissions and ownership]]
-  - [[#making-deleted-files-go-to-trash-can][Making deleted files go to trash can]]
-  - [[#enabling-icons-on-dired][Enabling icons on dired]]
-- [[#peep-dired-setting][Peep Dired Setting]]
-  - [[#peep-dired-activation][Peep Dired activation]]
-  - [[#toggle-peep-dired-with-spc-d-p][Toggle peep-dired with spc-d-p]]
-- [[#treemacs-setting][Treemacs Setting]]
-  - [[#treemac-toggle-setting][Treemac toggle setting]]
-- [[#theme-settings][Theme Settings]]
-- [[#layout-management-for-no-shrink-effect][Layout management for no shrink effect]]
-- [[#line-number-setting][Line number Setting]]
-- [[#org-directory-setting][Org directory Setting]]
-- [[#enable-the-relative-number-mode][Enable the relative number mode.]]
-- [[#require-for-faster-loading][Require for faster loading.]]
-- [[#emacs-dashboard-setup][Emacs-dashboard Setup.]]
-  - [[#remove-basic-evil-input-and-cursors-from-dashboard][Remove basic evil input and cursors from dashboard]]
-- [[#org-roam-setup][Org-roam Setup.]]
-  - [[#multi-org-roam-mode][Multi org-roam mode]]
-  - [[#org-roam-todo-configuration][Org-roam todo configuration]]
-  - [[#setup-org-agenda-from-org-roam][Setup Org Agenda from Org Roam]]
-  - [[#refreshing-org-roam-agenda][Refreshing org roam agenda]]
-  - [[#org-mode-keybindings][Org-mode keybindings]]
-  - [[#org-mode-ui-setup][Org-mode UI Setup]]
-
-* BEACON
-Never lose your cursor.  When you scroll, your cursor will shine!  This is a global minor-mode. Turn it on everywhere with:
-
-#+begin_src emacs-lisp
 (beacon-mode 1)
-#+end_src
 
-* Font Settings
-My Custom Font settings
-
-#+begin_src emacs-lisp
 (setq doom-font (font-spec :family "Agave Nerd Font" :size 12)
         doom-variable-pitch-font (font-spec :family "Agave Nerd Font" :size 12))
 (after! doom-themes
@@ -54,69 +8,19 @@ My Custom Font settings
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
-#+end_src
-* Info Settings
 
-#+begin_src emacs-lisp
 (setq user-full-name "aidr"
       user-mail-address "aidr****@gmail.com")
-#+end_src
 
-* Org Bullet List
-
-#+begin_src emacs-lisp
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿" "◆")
 )
 (add-hook 'org-mode-hook 'org-bullets-mode)
-#+end_src
 
-* Neotree Toggle Setup
-My Neotree Toggle Setup
-
-#+begin_src emacs-lisp
 (map! :leader
       :desc "Toggle neotree file viewer" "t n" #'neotree-toggle
       :desc "Open directory in neotree"  "d n" #'neotree-dir)
-#+end_src
 
-* Dired Config Setting
-** Basic dired commands
-
-| COMMAND                | DESCRIPTION                                 | KEYBINDING |
-|------------------------+---------------------------------------------+------------|
-| dired-view-file        | /View file in dired/                          | SPC d v    |
-| dired-up-directory     | /Go up in directory tree/                     | h          |
-| dired-find-file        | /Go down in directory tree (or open if file)/ | l          | | dired-next-line        | Move down to next line                      | j          | | dired-previous-line    | Move up to previous line                    | k          |
-| dired-mark             | Mark file at point                          | m          |
-| dired-unmark           | Unmark file at point                        | u          |
-| dired-do-copy          | Copy current file or marked files           | C          |
-| dired-do-rename        | Rename current file or marked files         | R          |
-| dired-hide-details     | Toggle detailed listings on/off             | (          |
-| dired-git-info-mode    | Toggle git information on/off               | )          |
-| dired-create-directory | Create new empty directory                  | +          |
-| dired-diff             | Compare file at point with another          | =          |
-| dired-subtree-toggle   | Toggle viewing subtree at point             | TAB        |
-
-** Dired commands using regex
-
-| COMMAND                 | DESCRIPTION                | KEYBINDING |
-|-------------------------+----------------------------+------------|
-| dired-mark-files-regexp | Mark files using regex     | % m        |
-| dired-do-copy-regexp    | Copy files using regex     | % C        |
-| dired-do-rename-regexp  | Rename files using regex   | % R        |
-| dired-mark-files-regexp | Mark all files using regex | * %        |
-
-** File permissions and ownership
-
-| COMMAND         | DESCRIPTION                      | KEYBINDING |
-|-----------------+----------------------------------+------------|
-| dired-do-chgrp  | Change the group of marked files | g G        |
-| dired-do-chmod  | Change the mode of marked files  | M          |
-| dired-do-chown  | Change the owner of marked files | O          |
-| dired-do-rename | Rename file or all marked files  | R          |
-
-#+begin_src emacs-lisp
 (map! :leader
       (:prefix ("d" . "dired")
        :desc "Open dired" "d" #'dired
@@ -147,100 +51,41 @@ My Neotree Toggle Setup
   (kbd "% u") 'dired-upcase
   (kbd "; d") 'epa-dired-do-decrypt
   (kbd "; e") 'epa-dired-do-encrypt)
- #+end_src
 
-** Making deleted files go to trash can
-
-#+begin_src emacs-lisp
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
-#+end_src
 
-** Enabling icons on dired
-
-#+begin_src emacs-lisp
 (add-hook 'dired-mode-hook 'dired-icon-mode)
 (add-hook 'ibuffer-mode-hook 'all-the-icons-ibuffer-mode)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-#+end_src
 
-* Peep Dired Setting
-** Peep Dired activation
-
-#+begin_src emacs-lisp
 (evil-define-key 'normal peep-dired-mode-map
   (kbd "j") 'peep-dired-next-file
   (kbd "k") 'peep-dired-prev-file)
 (add-hook 'peep-dired-hook 'evil-normalize-keymaps)
-#+end_src
 
-** Toggle peep-dired with spc-d-p
-
- #+begin_src emacs-lisp
 (map! :leader
 :desc "Peep-dired image previews" "d p" #'peep-dired)
- #+end_src
 
-* Treemacs Setting
-** Treemac toggle setting
-
- #+begin_src emacs-lisp
 (map! :leader
 :desc "Treemacs toggle" "e" #'treemacs)
- #+end_src
 
-* Theme Settings
-
-#+begin_src emacs-lisp
 (setq doom-theme 'doom-dracula)
-#+end_src
-
-#+RESULTS:
-: doom-nord
-
-* Layout management for no shrink effect
-
-#+begin_src emacs-lisp
 
 (add-to-list 'default-frame-alist '(width . 30px ))  ; Width set to 80 characters
 (add-to-list 'default-frame-alist '(height . 70px )) ; Height set to 24 lines
 
-#+end_src
-
-* Line number Setting
-
-#+begin_src emacs-lisp
 (setq display-line-numbers-type t)
-#+end_src
 
-* Org directory Setting
-
-#+begin_src emacs-lisp
 (setq org-directory "~/org/")
 (setq org-hide-emphasis-markers t)
-#+end_src
-
-* Enable the relative number mode.
-
-#+begin_src emacs-lisp
 
 (setq display-line-numbers-type 'relative)
-
-#+end_src
-
-* Require for faster loading.
-
-#+begin_src emacs-lisp
 
 (require 'org-agenda)
 (require 'dired)
 (setq scroll-margin 30)
 (setq hscroll-margin 10)
-
-#+end_src
-
-* Emacs-dashboard Setup.
-#+begin_src emacs-lisp
 
 (require 'all-the-icons)
 (require 'dashboard)
@@ -267,11 +112,6 @@ My Neotree Toggle Setup
                                   "I’ll tell you a DNS joke but it could take 24 hours for everyone to get it."
                                   "I'd tell you a UDP joke, but you might not get it."
                                   "I'll tell you a TCP joke. Do you want to hear it?"))
-#+end_src
-
-** Remove basic evil input and cursors from dashboard
-
-#+begin_src emacs-lisp
 
 (defun disable-cursor()
   (setq-local evil-normal-state-cursor '(bar . 0))
@@ -327,11 +167,6 @@ My Neotree Toggle Setup
 (map! :leader :desc "Open dashboard" "b b" #'dashboard-refresh-buffer)
 
 (setq scroll-conservatively 101)
-#+end_src
-
-* Org-roam Setup.
-
-#+begin_src emacs-lisp
 
 (require 'org-roam)
 (require 'org-roam-dailies)
@@ -356,11 +191,6 @@ My Neotree Toggle Setup
 )
 
 (setq org-roam-list-files-commands '(rg))
-
-#+end_src
-** Multi org-roam mode
-
-#+begin_src emacs-lisp
 
 (setq full-org-roam-db-list nil)
 
@@ -443,11 +273,6 @@ My Neotree Toggle Setup
   (org-roam-id-open ID)
   (when (not switchpersist)
     (org-roam-switch-db prev-org-roam-db-choice 1)))
-#+end_src
-
-** Org-roam todo configuration
-
-#+begin_src emacs-lisp
 
 (defun text-in-buffer-p (TEXT)
 (save-excursion (goto-char (point-min)) (search-forward TEXT nil t)))
@@ -528,14 +353,6 @@ My Neotree Toggle Setup
 
 (add-hook 'before-save-hook 'add-todos-tag-on-save-org-mode-file)
 
-
-#+end_src
-
-** Setup Org Agenda from Org Roam
-
-
-#+begin_src emacs-lisp
-
 (defun org-roam-filter-by-tag (tag-name)
   (lambda (node)
     (member tag-name (org-roam-node-tags node))))
@@ -556,11 +373,6 @@ My Neotree Toggle Setup
   (setq num (1+ num))
   )
 )
-#+end_src
-
-** Refreshing org roam agenda
-
-#+begin_src emacs-lisp
 
 (defun org-roam-refresh-agenda-list ()
   (interactive)
@@ -597,12 +409,6 @@ My Neotree Toggle Setup
       :desc "Refresh org agenda from roam dbs"
       "r" 'org-roam-refresh-agenda-list)
 
-#+end_src
-
-** Org-mode keybindings
-
-#+begin_src emacs-lisp
-
 (map! :leader
       :prefix ("N" . "org-roam notes")
 
@@ -636,12 +442,6 @@ My Neotree Toggle Setup
       :desc "Visualize org-roam database with org-roam-ui"
       "o" 'org-roam-open-dashboard)
 
-#+end_src
-
-** Org-mode UI Setup
-
-#+begin_src emacs-lisp
-
 (setq org-roam-ui-browser-function 'browse-url) ; wayland
 
 (defun open-org-roam-ui ()
@@ -673,5 +473,3 @@ My Neotree Toggle Setup
       :prefix ("N" . "org-roam notes")
       :desc "Kill all org roam ui buffers"
       "V" 'kill-org-roam-ui)
-
-#+end_src
