@@ -1,7 +1,7 @@
 (beacon-mode 1)
 
-(setq doom-font (font-spec :family "FantasqueSansM Nerd Font" :size 12)
-        doom-variable-pitch-font (font-spec :family "FantasqueSansM Nerd Font" :size 12))
+(setq doom-font (font-spec :family "Agave Nerd Font" :size 12)
+        doom-variable-pitch-font (font-spec :family "Agave Nerd Font" :size 12))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -10,7 +10,7 @@
   '(font-lock-keyword-face :slant italic))
 
 (setq user-full-name "aidr"
-      user-mail-address "aidrl1v3@gmail.com")
+      user-mail-address "aidr****@gmail.com")
 
 (setq
     org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿" "◆")
