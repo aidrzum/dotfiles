@@ -87,16 +87,18 @@ My Neotree Toggle Setup
 |------------------------+---------------------------------------------+------------|
 | dired-view-file        | /View file in dired/                          | SPC d v    |
 | dired-up-directory     | /Go up in directory tree/                     | h          |
-| dired-find-file        | /Go down in directory tree (or open if file)/ | l          | | dired-next-line        | Move down to next line                      | j          | | dired-previous-line    | Move up to previous line                    | k          |
-| dired-mark             | Mark file at point                          | m          |
-| dired-unmark           | Unmark file at point                        | u          |
-| dired-do-copy          | Copy current file or marked files           | C          |
-| dired-do-rename        | Rename current file or marked files         | R          |
-| dired-hide-details     | Toggle detailed listings on/off             | (          |
-| dired-git-info-mode    | Toggle git information on/off               | )          |
-| dired-create-directory | Create new empty directory                  | +          |
-| dired-diff             | Compare file at point with another          | =          |
-| dired-subtree-toggle   | Toggle viewing subtree at point             | TAB        |
+| dired-find-file        | /Go down in directory tree (or open if file)/ | l          | 
+| dired-next-line        | Move down to next line                        | j          | 
+| dired-previous-line    | Move up to previous line                      | k          |
+| dired-mark             | Mark file at point                            | m          |
+| dired-unmark           | Unmark file at point                          | u          |
+| dired-do-copy          | Copy current file or marked files             | C          |
+| dired-do-rename        | Rename current file or marked files           | R          |
+| dired-hide-details     | Toggle detailed listings on/off               | (          |
+| dired-git-info-mode    | Toggle git information on/off                 | )          |
+| dired-create-directory | Create new empty directory                    | +          |
+| dired-diff             | Compare file at point with another            | =          |
+| dired-subtree-toggle   | Toggle viewing subtree at point               | TAB        |
 
 ** Dired commands using regex
 

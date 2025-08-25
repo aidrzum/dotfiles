@@ -4,18 +4,18 @@
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     //"height": 10, // Waybar height (to be removed for auto height)
     "width": 1250, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "spacing": 0, // Gaps between modules (4px)
     "margin-top": 4,
     //"margin": "0 0 10 0",
     // Choose the order of the modules
     "modules-left": [
         "custom/appmenu",
         "hyprland/workspaces",
-        "mpd"
+        "mpd",
         //"hyprland/window"
         //"sway/mode",
         //"hyprland/scratchpad"
-        //"custom/media"
+        "custom/media"
     ],
     "modules-center": [
         "clock",
@@ -108,7 +108,7 @@
     },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10
+        "spacing": 6
         // "icons": {
         //   "blueman": "bluetooth",
         //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
@@ -183,19 +183,19 @@
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}%   {format_source}",
+        "format-bluetooth": "{volume}% {icon}  {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["", " ", " "]
         },
         "on-click": "terminator -e pulsemixer"
     },
@@ -233,7 +233,7 @@
     // Rofi Application Launcher
   "custom/appmenu": {
     // START APPS LABEL
-    "format": "Apps",
+    "format": " ",
     // END APPS LABEL
     "on-click": "sleep 0.2;pkill rofi || rofi -show drun -replace",
     "on-click-right": "~/.config/hypr/scripts/keybindings.sh",
@@ -268,15 +268,15 @@
 
     "custom/power": {
         "format" : "⏻ ",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "~/.config/waybar/scripts/Wlogout.sh", // Menu file in resources folder
+        "tooltip": false,
+        "menu": "on-click",
+        "menu-file": "~/.config/waybar/scripts/Wlogout.sh", // Menu file in resources folder
         "on-click": "~/.config/waybar/scripts/Wlogout.sh",
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+        "menu-actions": {
+            "shutdown": "shutdown",
+            "reboot": "reboot",
+            "suspend": "systemctl suspend",
+            "hibernate": "systemctl hibernate"
+        }
     }
 }
