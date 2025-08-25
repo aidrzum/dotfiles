@@ -460,6 +460,7 @@
       xdg-desktop-portal-gtk
       xdg-desktop-portal-hyprland
       xdg-utils
+      xdr-user-dirs
       yaru-remix-theme
       yazi
       zoxide
