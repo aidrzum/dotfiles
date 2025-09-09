@@ -8,7 +8,7 @@
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
 (setq user-full-name "l33tboi"
-      user-mail-address "aidrzum@gmail.com")
+      user-mail-address "aid****@gmail.com")
 (setq
  org-superstar-headline-bullets-list '("⁖" "◉" "○" "✸" "✿" "◆")
  )

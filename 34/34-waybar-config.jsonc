@@ -1,53 +1,55 @@
 // -*- mode: jsonc -*-
 {
-    // "layer": "top", // Waybar at top layer
+     "layer": "top",
     // "position": "bottom", // Waybar position (top|bottom|left|right)
-    //"height": 10, // Waybar height (to be removed for auto height)
-    "width": 1250, // Waybar width
-    "spacing": 1, // Gaps between modules (4px)
-    // Choose the order of the modules
+    //"height": 10,
+    "width": 1250,
+    "spacing": 1,
     "modules-left": [
         "hyprland/workspaces",
+        "power-profiles-daemon",
+        "idle_inhibitor",
         "mpd"
         //"sway/mode",
         //"sway/scratchpad",
-        //"custom/media"
     ],
     "modules-center": [
-        //"hyprland/window",
-        "clock"
+        "clock",
+	"custom/notification"
     ],
     "modules-right": [
-        "idle_inhibitor",
-        "pulseaudio",
-        //"network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
-        //"backlight",
-        //"keyboard-state",
-        //"hyprctl/language",
+        "pulseaudio",
         "battery",
-        //"battery#bat2",
         "tray",
         "custom/power"
+        //"backlight",
     ],
-    // Modules configuration
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "warp-on-scroll": false,
         "format": "{name}: {icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "",
-            "5": "",
-            "urgent": "",
-            "focused": "",
-            "default": ""
+            "1": " ",
+            "2": " ",
+            "3": " ",
+            "4": " ",
+            "5": " ",
+            "6": " ",
+            "7": " ",
+            "8": " ",
+            "9": " ",
+            "10": " ",
+            "11": " ",
+            "12": " ",
+            "13": " ",
+            "14": " ",
+            "urgent": " ",
+            "focused": " ",
+            "default": " "
         }
     },
     "keyboard-state": {
@@ -55,8 +57,8 @@
         "capslock": true,
         "format": "{name} {icon}",
         "format-icons": {
-            "locked": "",
-            "unlocked": ""
+            "locked": " ",
+            "unlocked": " "
         }
     },
     "sway/mode": {
@@ -65,7 +67,7 @@
     "sway/scratchpad": {
         "format": "{icon} {count}",
         "show-empty": false,
-        "format-icons": ["", ""],
+        "format-icons": ["", " "],
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
@@ -98,8 +100,8 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": " ",
+            "deactivated": " "
         }
     },
     "tray": {
@@ -126,7 +128,7 @@
     "temperature": {
         // "thermal-zone": 2,
         "hwmon-path": "/sys/class/hwmon/hwmon3/temp3_input",
-        "critical-threshold": 80,
+        "critical-threshold": 85,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
@@ -144,15 +146,12 @@
         },
         "format": "{capacity}% {icon}",
         "format-full": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-charging": "{capacity}%  ",
+        "format-plugged": "{capacity}%  ",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
-    },
-    "battery#bat2": {
-        "bat": "BAT0"
     },
     "power-profiles-daemon": {
       "format": "{icon}",
@@ -165,6 +164,33 @@
         "power-saver": ""
       }
     },
+
+ // SwayNC
+    "custom/notification": {
+      "tooltip-format": "Left: Notifications\nRight: Do not disturb",
+      "format": "{icon}",
+      "format-icons": {
+        "notification":
+          "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+        "none": "",
+        "dnd-notification":
+          "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+        "dnd-none": "",
+        "inhibited-notification":
+          "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+        "inhibited-none": "",
+        "dnd-inhibited-notification":
+          "<span rise='8pt'><span foreground='red'><sup></sup></span></span>",
+        "dnd-inhibited-none": ""
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "swaync-client -t -sw",
+      "on-click-right": "swaync-client -d -sw",
+      "escape": true
+    },
+
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
@@ -181,15 +207,15 @@
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
         "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format-source-muted": " ",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": ["", " ", " "]
         },
         "on-click": "kitty -e pulsemixer"
     },
@@ -206,15 +232,17 @@
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
     "custom/power": {
-        "format" : "⏻ ",
+        "format" : "⏻ ", // 
 		"tooltip": false,
 		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+		//"on-click": "$HOME/.config/waybar/Wlogout.sh",//
+		"on-click": "wlogout",
+
+      "menu-actions": {
+        "shutdown": "shutdown",
+        "reboot": "reboot",
+        "suspend": "systemctl suspend",
+        "hibernate": "systemctl hibernate"
+      }
     }
 }

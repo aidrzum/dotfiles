@@ -1,3 +1,5 @@
+@import "./colors.css";
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: FontAwesome, FantasqueSansM Nerd Font, Roboto, Helvetica, Arial, sans-serif;
@@ -6,12 +8,13 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
+    background-color: transparent;
+    /*background-color: rgba(43, 48, 59, 0.5);*/
     /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
-    color: #ffffff;
+    color: @tertiary;
     transition-property: background-color;
     transition-duration: .5s;
-    border-radius: 20;
+    border-radius: 20px;
 }
 
 window#waybar.hidden {
@@ -41,25 +44,26 @@ button {
     box-shadow: inset 0 -3px transparent;
     /* Avoid rounded borders under each button name */
     border: none;
-    border-radius: 0;
+    border-radius: 20px;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    box-shadow: inset 0 -3px @on_background;
 }
 
 /* you can set a style on hover for any module like this */
 #pulseaudio:hover {
-    /*background-color: #a37800;*/
-    background-color: transparent;
-}
 
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+    color: @tertiary;
+}
 #workspaces button {
     padding: 0 5px;
-    background-color: transparent;
-    color: #ffffff;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
 #workspaces button:hover {
@@ -90,7 +94,9 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
+#custom-notification,
 #custom-media,
+#custom-power,
 #tray,
 #mode,
 #idle_inhibitor,
@@ -115,22 +121,32 @@ button:hover {
 .modules-right > widget:last-child > #workspaces {
     margin-right: 0;
 }
+#clock:hover {
 
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #clock {
     /*background-color: #64727D; */
-    background-color: transparent;
+    background-color: @on_secondary;
+    color: @tertiary;
     /*border-radius: 10px 0px 0px 10px; */
 }
 
+#battery:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #battery {
     /*background-color: #ffffff; */
-    background-color: transparent;
-    color: #FFFFFF;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
 #battery.charging, #battery.plugged {
-    background-color: #26A65B;
-    color: #ffffff;
+    background-color: @on_primary;
+    color: @tertiary;
 }
 
 @keyframes blink {
@@ -144,7 +160,7 @@ button:hover {
 /* Using steps() instead of linear as a timing function to limit cpu usage */
 #battery.critical:not(.charging) {
     background-color: #f53c3c;
-    color: #ffffff;
+    color: @scrim;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: steps(12);
@@ -152,6 +168,11 @@ button:hover {
     animation-direction: alternate;
 }
 
+#power-profiles-daemon:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #power-profiles-daemon {
     padding-right: 15px;
 }
@@ -163,8 +184,8 @@ button:hover {
 
 #power-profiles-daemon.balanced {
     /*background-color: #2980b9; */
-    background-color: transparent;
-    color: #ffffff;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
 #power-profiles-daemon.power-saver {
@@ -176,18 +197,30 @@ label:focus {
     background-color: #000000;
 }
 
+#cpu:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #cpu {
     /*background-color : #2ecc71; */
-    background-color: transparent;
-    color: #FFFFFF;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
+#memory:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #memory {
     /*background-color: #9b59b6; */
-    background-color: transparent;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
 #disk {
+    background-color: #964B00;
     background-color: #964B00;
 }
 
@@ -207,14 +240,14 @@ label:focus {
 
 #pulseaudio {
     /*background-color: #f1c40f; */
-    background-color: transparent;
-    color: #FFFFFF;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
 #pulseaudio.muted {
     /*background-color: #90b1b1; */
     background-color: transparent;
-    color: #2a5c45;
+    color: @scrim;
 }
 
 #wireplumber {
@@ -226,6 +259,17 @@ label:focus {
     background-color: #f53c3c;
 }
 
+/* -----------------------------------------------------
+ * Custom Notification
+ * ----------------------------------------------------- */
+
+#custom-notification {
+    margin: 0px 13px 0px 0px;
+    padding: 0px;
+    font-size: 12px;
+    color: @secondary;
+    opacity: 1.0;
+}
 #custom-media {
     background-color: #66cc99;
     color: #2a5c45;
@@ -240,18 +284,40 @@ label:focus {
     background-color: #ffa000;
 }
 
+#custom-power:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
+#custom-power {
+
+    background-color: @on_secondary;
+    color: @tertiary;
+}
+#temperature:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #temperature {
     /*background-color: #f0932b; */
-    background-color: transparent;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
 #temperature.critical {
     background-color: #eb4d4b;
+    color: @scrim;
 }
 
+#tray:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #tray {
     /*background-color: #2980b9; */
-    background-color: transparent;
+    background-color: @on_secondary;
 }
 
 #tray > .passive {
@@ -263,9 +329,15 @@ label:focus {
     background-color: #eb4d4b;
 }
 
+#idle_inhibitor:hover {
+
+    background: inherit;
+    box-shadow: inset 0 -3px @on_background;
+}
 #idle_inhibitor {
     /*background-color: #2d3436; */
-    background-color: transparent;
+    background-color: @on_secondary;
+    color: @tertiary;
 }
 
 #idle_inhibitor.activated {
@@ -277,7 +349,7 @@ label:focus {
     /*background-color: #66cc99; */
     background-color: transparent;
     /*color: #2a5c45; */
-    color: #000000;
+    color: @tertiary;
 }
 
 #mpd.disconnected {
